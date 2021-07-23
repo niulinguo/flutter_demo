@@ -2,6 +2,7 @@ import 'package:banner_view/banner_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_demo/wan/api/api.dart';
 import 'package:flutter_demo/wan/article_item.dart';
+import 'package:flutter_demo/wan/page_webview.dart';
 
 class ArticlePage extends StatefulWidget {
   const ArticlePage({Key? key}) : super(key: key);
@@ -117,9 +118,21 @@ class _ArticlePageState extends State<ArticlePage> {
 
   Widget? _bannerView() {
     final List<Widget> list = banners
-        .map((item) => Image.network(
-              item['imagePath'],
-              fit: BoxFit.cover,
+        .map((item) => InkWell(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) {
+                      return WebViewPage(item);
+                    },
+                  ),
+                );
+              },
+              child: Image.network(
+                item['imagePath'],
+                fit: BoxFit.cover,
+              ),
             ))
         .toList();
     return list.isNotEmpty
