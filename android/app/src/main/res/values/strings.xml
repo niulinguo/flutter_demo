@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Flutter演示</string>
+
+    <string name="splash_image">启动图</string>
+</resources>
