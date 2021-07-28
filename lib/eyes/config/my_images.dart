@@ -12,4 +12,6 @@ class MyImages {
   static const String icon_hot_selected = "$_DIR/ic_hot_selected.png";
   static const String icon_mine_normal = "$_DIR/ic_mine_normal.png";
   static const String icon_mine_selected = "$_DIR/ic_mine_selected.png";
+
+  static const String icon_error = "$_DIR/ic_error.png";
 }

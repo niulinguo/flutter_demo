@@ -1,5 +1,5 @@
 class Feed {
-  late List<IssueList> issueList;
+  late List<Issue> issueList;
   late String nextPageUrl;
   late int nextPublishTime;
   late String newestIssueType;
@@ -15,9 +15,9 @@ class Feed {
 
   Feed.fromJson(Map<String, dynamic> json) {
     if (json['issueList'] != null) {
-      issueList = <IssueList>[];
+      issueList = <Issue>[];
       json['issueList'].forEach((v) {
-        issueList.add(new IssueList.fromJson(v));
+        issueList.add(new Issue.fromJson(v));
       });
     }
     nextPageUrl = json['nextPageUrl'];
@@ -39,15 +39,15 @@ class Feed {
   }
 }
 
-class IssueList {
+class Issue {
   late int releaseTime;
   late String type;
   late int date;
   late int publishTime;
-  late List<ItemList> itemList;
+  late List<Item> itemList;
   late int count;
 
-  IssueList({
+  Issue({
     required this.releaseTime,
     required this.type,
     required this.date,
@@ -56,15 +56,15 @@ class IssueList {
     required this.count,
   });
 
-  IssueList.fromJson(Map<String, dynamic> json) {
+  Issue.fromJson(Map<String, dynamic> json) {
     releaseTime = json['releaseTime'];
     type = json['type'];
     date = json['date'];
     publishTime = json['publishTime'];
     if (json['itemList'] != null) {
-      itemList = <ItemList>[];
+      itemList = <Item>[];
       json['itemList'].forEach((v) {
-        itemList.add(new ItemList.fromJson(v));
+        itemList.add(new Item.fromJson(v));
       });
     }
     count = json['count'];
@@ -84,15 +84,15 @@ class IssueList {
   }
 }
 
-class ItemList {
+class Item {
   late String type;
-  late Data data;
+  Data data;
   Null trackingData;
   Null tag;
   late int id;
   late int adIndex;
 
-  ItemList({
+  Item({
     required this.type,
     required this.data,
     this.trackingData,
@@ -101,9 +101,9 @@ class ItemList {
     required this.adIndex,
   });
 
-  ItemList.fromJson(Map<String, dynamic> json) {
+  Item.fromJson(Map<String, dynamic> json)
+      : data = new Data.fromJson(json['data']) {
     type = json['type'];
-    data = new Data.fromJson(json['data']);
     trackingData = json['trackingData'];
     tag = json['tag'];
     id = json['id'];
@@ -129,50 +129,50 @@ class Data {
   late int id;
   late String title;
   late String description;
-  late String image;
-  late String actionUrl;
+  String? image;
+  String? actionUrl;
   late List<String> adTrack;
-  late bool shade;
+  bool? shade;
   Null label;
   late List<String> labelList;
   Null header;
-  late bool autoPlay;
-  late String library;
+  bool? autoPlay;
+  String? library;
   late List<Tags> tags;
-  late Consumption consumption;
-  late String resourceType;
-  late String slogan;
-  late Provider provider;
-  late String category;
-  late Author author;
-  late Cover cover;
-  late String playUrl;
-  late String thumbPlayUrl;
-  late int duration;
-  late WebUrl webUrl;
-  late int releaseTime;
+  Consumption? consumption;
+  String? resourceType;
+  String? slogan;
+  Provider? provider;
+  String? category;
+  Author? author;
+  Cover? cover;
+  String? playUrl;
+  String? thumbPlayUrl;
+  int? duration;
+  WebUrl? webUrl;
+  int? releaseTime;
   late List<PlayInfo> playInfo;
   Null campaign;
   Null waterMarks;
-  late bool ad;
-  late String type;
-  late String titlePgc;
-  late String descriptionPgc;
-  late String remark;
-  late bool ifLimitVideo;
-  late int searchWeight;
+  bool? ad;
+  String? type;
+  String? titlePgc;
+  String? descriptionPgc;
+  String? remark;
+  bool? ifLimitVideo;
+  int? searchWeight;
   Null brandWebsiteInfo;
   Null videoPosterBean;
-  late int idx;
+  int? idx;
   Null shareAdTrack;
   Null favoriteAdTrack;
   Null webAdTrack;
-  late int date;
+  int? date;
   Null promotion;
-  late String descriptionEditor;
-  late bool collected;
-  late bool reallyCollected;
-  late bool played;
+  String? descriptionEditor;
+  bool? collected;
+  bool? reallyCollected;
+  bool? played;
   late List<String> subtitles;
   Null lastViewTime;
   Null playlists;
@@ -184,50 +184,50 @@ class Data {
     required this.id,
     required this.title,
     required this.description,
-    required this.image,
-    required this.actionUrl,
+    this.image,
+    this.actionUrl,
     required this.adTrack,
-    required this.shade,
+    this.shade,
     this.label,
     required this.labelList,
     this.header,
-    required this.autoPlay,
-    required this.library,
+    this.autoPlay,
+    this.library,
     required this.tags,
-    required this.consumption,
-    required this.resourceType,
-    required this.slogan,
-    required this.provider,
-    required this.category,
-    required this.author,
-    required this.cover,
-    required this.playUrl,
-    required this.thumbPlayUrl,
-    required this.duration,
-    required this.webUrl,
-    required this.releaseTime,
+    this.consumption,
+    this.resourceType,
+    this.slogan,
+    this.provider,
+    this.category,
+    this.author,
+    this.cover,
+    this.playUrl,
+    this.thumbPlayUrl,
+    this.duration,
+    this.webUrl,
+    this.releaseTime,
     required this.playInfo,
     this.campaign,
     this.waterMarks,
-    required this.ad,
-    required this.type,
-    required this.titlePgc,
-    required this.descriptionPgc,
-    required this.remark,
-    required this.ifLimitVideo,
-    required this.searchWeight,
+    this.ad,
+    this.type,
+    this.titlePgc,
+    this.descriptionPgc,
+    this.remark,
+    this.ifLimitVideo,
+    this.searchWeight,
     this.brandWebsiteInfo,
     this.videoPosterBean,
-    required this.idx,
+    this.idx,
     this.shareAdTrack,
     this.favoriteAdTrack,
     this.webAdTrack,
-    required this.date,
+    this.date,
     this.promotion,
-    required this.descriptionEditor,
-    required this.collected,
-    required this.reallyCollected,
-    required this.played,
+    this.descriptionEditor,
+    this.collected,
+    this.reallyCollected,
+    this.played,
     required this.subtitles,
     this.lastViewTime,
     this.playlists,
@@ -265,17 +265,23 @@ class Data {
         tags.add(new Tags.fromJson(v));
       });
     }
-    consumption = new Consumption.fromJson(json['consumption']);
+    consumption = json['consumption'] == null
+        ? null
+        : new Consumption.fromJson(json['consumption']);
     resourceType = json['resourceType'];
     slogan = json['slogan'];
-    provider = new Provider.fromJson(json['provider']);
+    provider = json['provider'] == null
+        ? null
+        : new Provider.fromJson(json['provider']);
     category = json['category'];
-    author = new Author.fromJson(json['author']);
-    cover = new Cover.fromJson(json['cover']);
+    author =
+        json['author'] == null ? null : new Author.fromJson(json['author']);
+    cover = json['cover'] == null ? null : new Cover.fromJson(json['cover']);
     playUrl = json['playUrl'];
     thumbPlayUrl = json['thumbPlayUrl'];
     duration = json['duration'];
-    webUrl = new WebUrl.fromJson(json['webUrl']);
+    webUrl =
+        json['webUrl'] == null ? null : new WebUrl.fromJson(json['webUrl']);
     releaseTime = json['releaseTime'];
     if (json['playInfo'] != null) {
       playInfo = <PlayInfo>[];
@@ -340,25 +346,25 @@ class Data {
       data['tags'] = this.tags.map((v) => v.toJson()).toList();
     }
     if (this.consumption != null) {
-      data['consumption'] = this.consumption.toJson();
+      data['consumption'] = this.consumption!.toJson();
     }
     data['resourceType'] = this.resourceType;
     data['slogan'] = this.slogan;
     if (this.provider != null) {
-      data['provider'] = this.provider.toJson();
+      data['provider'] = this.provider!.toJson();
     }
     data['category'] = this.category;
     if (this.author != null) {
-      data['author'] = this.author.toJson();
+      data['author'] = this.author!.toJson();
     }
     if (this.cover != null) {
-      data['cover'] = this.cover.toJson();
+      data['cover'] = this.cover!.toJson();
     }
     data['playUrl'] = this.playUrl;
     data['thumbPlayUrl'] = this.thumbPlayUrl;
     data['duration'] = this.duration;
     if (this.webUrl != null) {
-      data['webUrl'] = this.webUrl.toJson();
+      data['webUrl'] = this.webUrl!.toJson();
     }
     data['releaseTime'] = this.releaseTime;
     if (this.playInfo != null) {
@@ -402,7 +408,7 @@ class Tags {
   late String name;
   late String actionUrl;
   Null adTrack;
-  late String desc;
+  String? desc;
   late String bgPicture;
   late String headerImage;
   late String tagRecType;
@@ -418,7 +424,7 @@ class Tags {
     required this.name,
     required this.actionUrl,
     this.adTrack,
-    required this.desc,
+    this.desc,
     required this.bgPicture,
     required this.headerImage,
     required this.tagRecType,
@@ -650,22 +656,21 @@ class Shield {
 }
 
 class Cover {
-  late String feed;
+  String feed;
   late String detail;
   late String blurred;
   Null sharing;
-  late String homepage;
+  String? homepage;
 
   Cover({
     required this.feed,
     required this.detail,
     required this.blurred,
     this.sharing,
-    required this.homepage,
+    this.homepage,
   });
 
-  Cover.fromJson(Map<String, dynamic> json) {
-    feed = json['feed'];
+  Cover.fromJson(Map<String, dynamic> json) : feed = json['feed'] {
     detail = json['detail'];
     blurred = json['blurred'];
     sharing = json['sharing'];

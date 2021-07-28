@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_demo/eyes/config/my_images.dart';
 import 'package:flutter_demo/eyes/config/my_strings.dart';
+import 'package:flutter_demo/eyes/pages/home/home_page.dart';
 import 'package:flutter_demo/eyes/view_model/tab_navigation_view_model.dart';
 import 'package:flutter_demo/eyes/widget/provider_widget.dart';
 
@@ -66,9 +67,7 @@ class _TabNavigationState extends State<TabNavigation> {
     switch (index) {
       case 0:
         {
-          return Container(
-            color: Colors.blue,
-          );
+          return const HomePage();
         }
       case 1:
         {

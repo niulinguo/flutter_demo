@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_demo/eyes/app_init.dart';
 import 'package:flutter_demo/eyes/double_back_pop_widget.dart';
 import 'package:flutter_demo/eyes/tab_navigation.dart';
+import 'package:get/get.dart';
 
 void main() {
   runApp(MyApp());
@@ -66,12 +67,22 @@ class MaterialAppWidget extends StatefulWidget {
 class _MaterialAppWidgetState extends State<MaterialAppWidget> {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    // return MaterialApp(
+    //   title: '天眼视频',
+    //   initialRoute: '/',
+    //   routes: {
+    //     '/': (context) => widget.child,
+    //   },
+    // );
+    return GetMaterialApp(
       title: '天眼视频',
       initialRoute: '/',
-      routes: {
-        '/': (context) => widget.child,
-      },
+      getPages: [
+        GetPage(
+          name: '/',
+          page: () => widget.child,
+        ),
+      ],
     );
   }
 }

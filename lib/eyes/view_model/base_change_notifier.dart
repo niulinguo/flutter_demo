@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_demo/eyes/widget/loading_state_widget.dart';
 
 class BaseChangeNotifier extends ChangeNotifier {
+  ViewState viewState = ViewState.loading;
+
   bool _disposed = false;
 
   @override
