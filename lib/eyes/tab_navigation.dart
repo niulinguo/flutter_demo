@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_demo/eyes/config/my_images.dart';
 import 'package:flutter_demo/eyes/config/my_strings.dart';
+import 'package:flutter_demo/eyes/view_model/tab_navigation_view_model.dart';
+import 'package:flutter_demo/eyes/widget/provider_widget.dart';
 
 class TabNavigation extends StatefulWidget {
   const TabNavigation({Key? key}) : super(key: key);
@@ -10,25 +12,45 @@ class TabNavigation extends StatefulWidget {
 }
 
 class _TabNavigationState extends State<TabNavigation> {
-  int _currentIndex = 0;
   final List<Widget?> bodyList = [null, null, null, null];
+  final PageController _pageController = PageController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: _createOrGetBody(_currentIndex),
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _currentIndex,
-        items: [
-          BottomBarItem.home(),
-          BottomBarItem.discovery(),
-          BottomBarItem.hot(),
-          BottomBarItem.mine(),
+      body: PageView(
+        controller: _pageController,
+        physics: NeverScrollableScrollPhysics(),
+        children: [
+          _createOrGetBody(0),
+          _createOrGetBody(1),
+          _createOrGetBody(2),
+          _createOrGetBody(3),
         ],
-        onTap: _onTap,
-        selectedItemColor: const Color(0xff000000),
-        unselectedItemColor: const Color(0xff9a9a9a),
-        type: BottomNavigationBarType.fixed,
+      ),
+      bottomNavigationBar: ProviderWidget<TabNavigationViewModel>(
+        model: TabNavigationViewModel(),
+        builder: (BuildContext context, TabNavigationViewModel model,
+            Widget? child) {
+          return BottomNavigationBar(
+            currentIndex: model.currentIndex,
+            items: [
+              BottomBarItem.home(),
+              BottomBarItem.discovery(),
+              BottomBarItem.hot(),
+              BottomBarItem.mine(),
+            ],
+            onTap: (index) {
+              if (index != model.currentIndex) {
+                model.changeBottomTabIndex(index);
+                _onTap(context, index);
+              }
+            },
+            selectedItemColor: const Color(0xff000000),
+            unselectedItemColor: const Color(0xff9a9a9a),
+            type: BottomNavigationBarType.fixed,
+          );
+        },
       ),
     );
   }
@@ -69,10 +91,8 @@ class _TabNavigationState extends State<TabNavigation> {
     }
   }
 
-  void _onTap(int index) {
-    setState(() {
-      _currentIndex = index;
-    });
+  void _onTap(BuildContext context, int index) {
+    _pageController.jumpToPage(index);
   }
 }
 

@@ -32,6 +32,7 @@ dependencies:
   banner_view: ^1.1.2
   flutter_splash_screen: ^0.3.0
   fluttertoast: ^8.0.7
+  provider: ^5.0.0
 
 dev_dependencies:
   flutter_test:
